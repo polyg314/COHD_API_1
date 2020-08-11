@@ -14,7 +14,7 @@ def file_len(fname):
             pass
     return i + 1
 
-def generate_results(concept_dict):
+def generate_results(concept_dict, xref_data_dict):
     assoc_id = int(concept_dict["concept_id_2"])
     current_result = {
             "associated_concept_id": assoc_id,
@@ -40,6 +40,7 @@ def load_annotations(data_folder):
         xref_data = json.load(f)
     
     xref_data_dict = {}
+
     for x in xref_data:
         xref_data_dict[x["_id"]] = x
 
@@ -56,16 +57,16 @@ def load_annotations(data_folder):
             if(first_chunk):
                 last_id = int(paired_concepts_table.iloc[0]["concept_id_1"])
                 current_results = []
-                current_results.append(generate_results(paired_concepts_table.iloc[0]))
+                current_results.append(generate_results(paired_concepts_table.iloc[0],xref_data_dict))
                 current_count = 1
                 first_chunk = False
             elif((current_count < MAX_COMBOS) & (last_id == current_id) & (row_counter != (row_total - 1))):
-                current_results.append(generate_results(j))
+                current_results.append(generate_results(j,xref_data_dict))
                 current_count = current_count + 1
             elif((last_id != current_id) | (i == (row_total - 1))):
                 last_id_results = current_results
                 if((current_count < MAX_COMBOS)&(last_id == current_id)&(i == (row_total - 1))):
-                    last_id_results.append(generate_results(j))
+                    last_id_results.append(generate_results(j,xref_data_dict))
                 elif((last_id != current_id) & (i == (row_total - 1))):
                     extra_entry = True
                     extra_dict = {
@@ -73,11 +74,11 @@ def load_annotations(data_folder):
                         "concept_name": xref_data_dict[str(current_id)]["concept_name"],
                         "domain_id": xref_data_dict[str(current_id)]["domain_id"],
                         "xrefs": xref_data_dict[str(current_id)],
-                        "results": [generate_results(j)]
+                        "results": [generate_results(j,xref_data_dict)]
                     }
                 else:
                     current_results = []
-                    current_results.append(generate_results(j))
+                    current_results.append(generate_results(j,xref_data_dict))
                     current_count = 1
                 current_dict = {
                     "_id": last_id,
