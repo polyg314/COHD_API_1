@@ -43,7 +43,7 @@ def load_annotations(data_folder):
     for x in xref_data:
         xref_data_dict[x["_id"]] = x
 
-    paired_concepts_table_total = pd.read_csv(paired_concept_url, sep='\t', header=None, names= paired_concept_column_names, chunksize=chunk_size)  
+    paired_concepts_table_total = pd.read_csv(paired_concept_url, sep='\t', header=None, names= PAIRED_CONCEPT_COLUMN_NAMES, chunksize=chunk_size)  
     first_chunk = True
     row_counter = 0
     row_total = file_len(PAIRED_CONCEPT_FILE_PATH)
