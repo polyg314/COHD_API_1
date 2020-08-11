@@ -46,7 +46,7 @@ def load_annotations(data_folder):
     paired_concepts_table_total = pd.read_csv(paired_concept_url, sep='\t', header=None, names= PAIRED_CONCEPT_COLUMN_NAMES, chunksize=CHUNK_SIZE)  
     first_chunk = True
     row_counter = 0
-    row_total = file_len(PAIRED_CONCEPT_FILE_PATH)
+    row_total = file_len(paired_concept_url)
     extra_entry = False
     for chunk in paired_concepts_table_total:
         paired_concepts_table = chunk
