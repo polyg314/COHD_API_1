@@ -33,15 +33,15 @@ def generate_results(concept_dict):
 
 def load_annotations(data_folder):
 
-	paired_concept_url = os.path.join(data_folder,PAIRED_CONCEPT_FILE_NAME)
-	concept_xref_url = os.path.join(data_folder,CONCEPT_XREF_FILE_NAME)
-	
-	with open(concept_xref_url) as f:
-	  xref_data = json.load(f)
-	
-	xref_data_dict = {}
-	for x in xref_data:
-	    xref_data_dict[x["_id"]] = x
+    paired_concept_url = os.path.join(data_folder,PAIRED_CONCEPT_FILE_NAME)
+    concept_xref_url = os.path.join(data_folder,CONCEPT_XREF_FILE_NAME)
+    
+    with open(concept_xref_url) as f:
+        xref_data = json.load(f)
+    
+    xref_data_dict = {}
+    for x in xref_data:
+        xref_data_dict[x["_id"]] = x
 
     paired_concepts_table_total = pd.read_csv(paired_concept_url, sep='\t', header=None, names= paired_concept_column_names, chunksize=chunk_size)  
     first_chunk = True
