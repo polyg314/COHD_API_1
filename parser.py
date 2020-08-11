@@ -70,7 +70,7 @@ def load_annotations(data_folder):
                 elif((last_id != current_id) & (i == (row_total - 1))):
                     extra_entry = True
                     extra_dict = {
-                        "_id": current_id,
+                        "_id": str(current_id),
                         "concept_name": xref_data_dict[str(current_id)]["concept_name"],
                         "domain_id": xref_data_dict[str(current_id)]["domain_id"],
                         "xrefs": xref_data_dict[str(current_id)],
@@ -81,7 +81,7 @@ def load_annotations(data_folder):
                     current_results.append(generate_results(j,xref_data_dict))
                     current_count = 1
                 current_dict = {
-                    "_id": last_id,
+                    "_id": str(last_id),
                     "concept_name": xref_data_dict[str(last_id)]["concept_name"],
                     "domain_id": xref_data_dict[str(last_id)]["domain_id"],
                     "xrefs": xref_data_dict[str(last_id)],
