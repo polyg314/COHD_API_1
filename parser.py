@@ -73,7 +73,7 @@ def load_annotations(data_folder):
                         "_id": str(current_id),
                         "concept_name": xref_data_dict[str(current_id)]["concept_name"],
                         "domain_id": xref_data_dict[str(current_id)]["domain_id"],
-                        "xrefs": xref_data_dict[str(current_id)],
+                        "xrefs": xref_data_dict[str(current_id)]["xrefs"],
                         "results": [generate_results(j,xref_data_dict)]
                     }
                 else:
@@ -84,7 +84,7 @@ def load_annotations(data_folder):
                     "_id": str(last_id),
                     "concept_name": xref_data_dict[str(last_id)]["concept_name"],
                     "domain_id": xref_data_dict[str(last_id)]["domain_id"],
-                    "xrefs": xref_data_dict[str(last_id)],
+                    "xrefs": xref_data_dict[str(last_id)]["xrefs"],
                     "results": last_id_results
                 }
 #                 print(current_dict)
