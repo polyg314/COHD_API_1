@@ -59,10 +59,10 @@ def load_annotations(data_folder):
                 current_results.append(generate_results(paired_concepts_table.iloc[0], xref_data_dict))
                 current_count = 1
                 first_chunk = False
-            elif((current_count < max_combos) & (last_id == current_id) & (row_counter != (row_total - 1))):
+            elif((current_count < MAX_COMBOS) & (last_id == current_id) & (row_counter != (row_total - 1))):
                 current_results.append(generate_results(j,xref_data_dict))
                 current_count = current_count + 1
-            elif((current_count >= max_combos) & (last_id == current_id) & (row_counter != (row_total - 1))):
+            elif((current_count >= MAX_COMBOS) & (last_id == current_id) & (row_counter != (row_total - 1))):
                 current_results.append(generate_results(j,xref_data_dict))
                 current_results.pop(0)
                 current_count = current_count + 1
@@ -70,7 +70,7 @@ def load_annotations(data_folder):
                 last_id_results = current_results
                 if((last_id == current_id)):
                     last_id_results.append(generate_results(j))
-                    if(len(last_id_results) > max_combos):
+                    if(len(last_id_results) > MAX_COMBOS):
                         last_id_results.pop(0)
                 elif((last_id != current_id) & (i == (row_total - 1))):
                     extra_entry = True
